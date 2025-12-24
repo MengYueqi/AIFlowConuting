@@ -102,10 +102,9 @@ class TransactionReportGenerator:
         )
 
 
-def render_markdown(report: ReportData) -> str:
+def format_report_source(report: ReportData) -> str:
+    """Return the raw data block fed into the LLM prompt."""
     lines = [
-        f"# {report.report_time}月报",
-        "",
         f"## 总览",
         f"- 收入：¥{report.total_income:.2f}（{report.income_count} 笔）",
         f"- 支出：¥{report.total_expense:.2f}（{report.expense_count} 笔）",
@@ -122,12 +121,7 @@ def render_markdown(report: ReportData) -> str:
             lines.append(
                 f"| {summary.category_name} | ¥{summary.total_amount:.2f} | {summary.count} |"
             )
-    lines.extend(
-        [
-            "",
-            "## 金额最高的 10 笔支出",
-        ]
-    )
+    lines.extend(["", "## 金额最高的 10 笔支出"])
     if not report.top_expenses:
         lines.append("暂无支出记录")
     else:
@@ -137,7 +131,7 @@ def render_markdown(report: ReportData) -> str:
             lines.append(
                 f"| {row['transaction_time']} | {row['counterparty']} | {row['description']} | {row['tag']} | ¥{row['amount']:.2f} |"
             )
-    return "\n".join(lines) + "\n"
+    return "\n".join(lines).strip() + "\n"
 
 
-__all__ = ["TransactionReportGenerator", "render_markdown"]
+__all__ = ["TransactionReportGenerator", "format_report_source", "ReportData"]

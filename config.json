@@ -15,7 +15,7 @@
         "tag": ""
     },
     "model": {
-        "name": "gemma3:4b",
+        "name": "qwen2.5:7b-instruct",
         "executable": "ollama"
     }
 }
