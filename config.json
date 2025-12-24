@@ -1,0 +1,21 @@
+{
+    "data_sources": {
+        "alipay": [
+            "data/2025-04/支付宝交易明细(20250401-20250430).csv"
+        ],
+        "wechat": [
+            "data/2025-04/微信支付账单(20240101-20240131).csv"
+        ]
+    },
+    "output": {
+        "transactions": "data/processed/transaction-{report_time}.csv"
+    },
+    "metadata": {
+        "report_time": "2025-04",
+        "tag": ""
+    },
+    "model": {
+        "name": "gemma3:4b",
+        "executable": "ollama"
+    }
+}
